@@ -80,14 +80,14 @@
                 text-shadow: 2px 2px 0px #000000;
             }
 
-            .arena-table td.player-name {
+            .arena-table td:first-child {
                 text-align: left;
                 font-size: 13px;
                 color: #ffffff;
                 padding-left: 20px;
             }
 
-            .arena-table td.player-name::before {
+            .arena-table td:first-child::before {
                 content: "🥔";
                 display: inline-block;
                 font-size: 14px;
@@ -97,6 +97,10 @@
 
             .arena-table tr:hover td {
                 background-color: rgba(255, 255, 255, 0.05);
+            }
+
+            td {
+                font-size: 20px;
             }
         </style>
     </head>
@@ -116,17 +120,38 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td class="player-name">Али</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td class="player-name">Андрей</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td class="player-name">Акрам</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td class="player-name">Тахир</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td class="player-name">Зульфат</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td class="player-name">Ясин</td><td></td><td></td><td></td><td></td><td></td></tr>
-                    <tr><td class="player-name">Раиль</td><td></td><td></td><td></td><td></td><td></td></tr>
                 </tbody>
             </table>
         </div>
     </div>
+
+    <script>
+
+        function parse_battles(data, participants, type) {
+            data[type].forEach(battle => {
+                if(battle[2] != battle[0] && battle[2] != battle[1]) throw new Error(`Wrong winner (${participants[battle[0]].name} vs ${participants[battle[1]].name}, ${type} battle)`)
+
+                participants[battle[0]][type]++
+                participants[battle[0]][battle[0] == battle[2] ? "victories" : "losses"]++
+
+                participants[battle[1]][type]++
+                participants[battle[1]][battle[1] == battle[2] ? "victories" : "losses"]++
+            })
+        }
+
+        const tbody = document.querySelector("tbody")
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                let participants = []
+                data.participants.forEach(p =>  participants.push({name: p, first_kit: 0, second_kit: 0, victories: 0, losses: 0}))
+                parse_battles(data, participants, "first_kit")
+                parse_battles(data, participants, "second_kit")
+                participants.forEach(p => tbody.innerHTML += `<tr><td>${p.name}</td><td>${p.first_kit}</td><td>${p.second_kit}</td><td>${p.victories}</td><td>${p.losses}</td><td>${p.victories*2}</td></tr>`)
+            })
+            .catch(err => alert('Ошибка: ' + err.message))
+
+    </script>
 
 </body>
 </html>
