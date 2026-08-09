@@ -11,19 +11,113 @@
 
             html, body {
                 height: 100vh;
-                width: 177.77vh;
             }
             body {
-                margin: 0;
+                width: 177.77vh;
+                margin: 0 auto;
                 background: url(background.jpg);
-                background-size: cover;
-                background-position: center;
+                background-size: 177.77vh 100vh;
                 font-family: press-start;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                padding-bottom: 5vh;
+                box-sizing: border-box;
+                color: #ffffff;
+            }
+
+            .arena-frame {
+                width: 78%;
+                background-image: url('dark_oak_planks.png');
+                background-repeat: repeat;
+                image-rendering: pixelated;
+                padding: 12px;
+                box-shadow: 0px 12px 30px rgba(0,0,0,0.8);
+            }
+
+            .arena-table-container {
+                background-color: rgba(16, 16, 16, 0.88);
+                padding: 8px;
+                box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.9);
+            }
+
+            .arena-table {
+                width: 100%;
+                border-collapse: collapse;
+                text-align: center;
+                font-size: 10px;
+                line-height: 1.4;
+            }
+
+            .arena-table th {
+                background-color: rgba(0, 0, 0, 0.4);
+                border: 2px solid #3c3c3c;
+                padding: 12px 4px;
+                font-weight: normal;
+                color: #ffaa00;
+                text-shadow: 2px 2px 0px #000000;
+                vertical-align: middle;
+            }
+
+            .arena-table th .icon-num {
+                display: block;
+                font-size: 13px;
+                margin-bottom: 5px;
+                color: #ffffff;
+            }
+
+            .arena-table td {
+                border: 2px solid #3c3c3c;
+                height: 38px;
+                text-shadow: 2px 2px 0px #000000;
+            }
+
+            .arena-table td.player-name {
+                text-align: left;
+                font-size: 14px;
+                color: #ffffff;
+                padding-left: 15px;
+            }
+
+            .arena-table td.player-name::before {
+                content: "🥔 ";
+                font-size: 12px;
+                margin-right: 8px;
+                vertical-align: middle;
+            }
+
+            .arena-table tr:hover td {
+                background-color: rgba(255, 255, 255, 0.08);
             }
         </style>
     </head>
 <body>
 
+    <div class="arena-frame">
+        <div class="arena-table-container">
+            <table class="arena-table">
+                <thead>
+                    <tr>
+                        <th style="width: 24%; color: #ff5555; font-size: 13px;">УЧАСТНИКИ</th>
+                        <th style="width: 16%;"><span class="icon-num">⚔️ 1</span>СКОЛЬКО ИГР<br>СЫГРАНО НА 1 НАБОРЕ</th>
+                        <th style="width: 16%;"><span class="icon-num">⚔️ 2</span>СКОЛЬКО ИГР<br>СЫГРАНО НА 2 НАБОРЕ</th>
+                        <th style="width: 14%;"><span class="icon-num">🏆 3</span>КОЛИЧЕСТВО<br>ПОБЕД</th>
+                        <th style="width: 16%;"><span class="icon-num">🛡️ 4</span>КОЛИЧЕСТВО<br>ПОРАЖЕНИЙ</th>
+                        <th style="width: 14%; color: #ffff55;"><span class="icon-num">⭐ 5</span>ОЧКИ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="player-name">Али</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td class="player-name">Андрей</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td class="player-name">Акрам</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td class="player-name">Тахир</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td class="player-name">Зульфат</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td class="player-name">Ясин</td><td></td><td></td><td></td><td></td><td></td></tr>
+                    <tr><td class="player-name">Раиль</td><td></td><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </body>
 </html>
-
